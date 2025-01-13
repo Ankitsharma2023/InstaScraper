@@ -7,16 +7,16 @@ const UserReels = () => {
         "http://localhost:5000/get_reels?username=" + username,
         {
           method: "GET",
-          mode: "no-cors",
           headers: {
             "Content-Type": "application/json",
           },
         }
       );
-      console.log(response.body);
       const data = await response.json();
       setUserResponse(data);
       setReelsRows(chunkReels(data.reels, 3));
+
+      
     }
   };
   const [userResponse, setUserResponse] = useState({});
@@ -55,7 +55,7 @@ const UserReels = () => {
         <div>
           <h2>Username: {userResponse.username}</h2>
           <img
-            src={userResponse.pfPhoto}
+            src={"http://localhost:5000/img?src="+encodeURIComponent(userResponse.pfPhoto)}
             alt="Profile"
             style={{ borderRadius: "50%", width: "100px", margin: "10px 0" }}
           />
